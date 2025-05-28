@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Ejercicio1"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "24e25d72-c80f-460a-8ab3-bb5620d3eae3"
+  }
+}

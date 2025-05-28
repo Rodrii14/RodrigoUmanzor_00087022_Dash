@@ -1,0 +1,54 @@
+table Dim_Vendedor
+	lineageTag: 3bba32c5-7d0c-4176-a164-7395e512a510
+
+	column ID_Vendedor
+		dataType: int64
+		formatString: 0
+		lineageTag: 56f2d268-53d1-4dc8-a57c-3ce05ab5d7d1
+		summarizeBy: none
+		sourceColumn: ID_Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendedor
+		dataType: string
+		lineageTag: e15c54b4-c671-448d-a1e3-d82c5f4ed3ef
+		summarizeBy: none
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_nacimiento
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0e8c61d0-5fd2-4beb-b3a0-b2554321b9a5
+		summarizeBy: none
+		sourceColumn: fecha_nacimiento
+
+		variation Variación
+			isDefault
+			relationship: 9b4a6f3e-0522-4377-8009-d210254a7a54
+			defaultHierarchy: LocalDateTable_570610a4-f13a-429c-aaa0-36821456cb5a.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Foto
+		dataType: string
+		lineageTag: 03369a49-006f-4ff4-9e6b-c771181cc509
+		summarizeBy: none
+		sourceColumn: Foto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Vendedor = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\rodum\Downloads\VentasVehiculos.xlsx"), null, true),
+				    Dim_Vendedor_Table = Origen{[Item="Dim_Vendedor",Kind="Table"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Dim_Vendedor_Table,{{"ID_Vendedor", Int64.Type}, {"Vendedor", type text}, {"fecha_nacimiento", type datetime}, {"Foto", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

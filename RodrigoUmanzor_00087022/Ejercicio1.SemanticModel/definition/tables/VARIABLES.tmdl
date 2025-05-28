@@ -1,0 +1,27 @@
+table VARIABLES
+	lineageTag: f88e9794-6e26-46ae-8d7a-7fc5d6fa859d
+
+	measure CONT_VENTAS = COUNT(Fact_Ventas[ID])
+		formatString: 0
+		lineageTag: f3321bab-1bcc-4b51-a7d5-0fdf08d22d03
+
+	measure Medida
+		lineageTag: 2a310944-149a-40d5-ac9f-a577363725be
+
+	column Column
+		formatString: 0
+		lineageTag: bb5585f7-192b-4eba-90a0-8fa6dd696a5a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition VARIABLES = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 1e67ab85495c47b9a9067f9a6b85e761
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+
